@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista Motociclette</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Mini-tema categoria: MOTOCICLETTE (verde) -->
+  <style>
+    .theme-moto  { --cat: #198754; --cat-dark: #157347; --cat-text: #fff; }
+
+    .category-band { background: var(--cat); color: var(--cat-text); padding: .75rem 1rem; border-radius: .75rem; }
+    .category-badge { display:inline-block; padding:.25rem .6rem; border-radius:.5rem;
+      background: var(--cat-dark); color: var(--cat-text); font-size:.875rem; }
+
+    .card.theme-accent { border-top: .3rem solid var(--cat); border-radius: .75rem; }
+
+    .btn-cat { background: var(--cat); color: var(--cat-text); border:none;
+      transition: background-color .2s ease, color .2s ease; }
+    .btn-cat:hover { background: var(--cat-dark); color: var(--cat-text); }
+    .btn-cat:active { transform: translateY(1px); }
+
+    /* Link laterali coerenti col tema: niente sottolineatura fissa */
+    .link-cat {
+      color: var(--cat);
+      text-decoration: none !important;
+      font-weight: 500;
+      transition: color .2s ease, text-decoration-color .2s ease;
+    }
+    .link-cat:hover {
+      color: var(--cat-dark);
+      text-decoration: underline !important;
+    }
+    
+    /* Background neutro + contrasto morbido su card e banda */
+html, body { background-color: #e6e9ee; }        /* grigio chiaro neutro */
+.category-band { box-shadow: 0 .25rem .75rem rgba(0,0,0,.06); }
+.card { background: #fff; border: 1px solid rgba(0,0,0,.08); box-shadow: 0 .125rem .35rem rgba(0,0,0,.06); }
+/* spaziatura extra sotto le liste */
+.container { padding-bottom: 2rem; }
+
+/* Footer a tema categoria */
+.footer-band {
+  width: 100%;
+  background: var(--cat);
+  color: var(--cat-text);
+  text-align: center;
+  font-weight: 600;
+  padding: 14px 10px;
+  border-radius: .75rem;
+  box-shadow: 0 .25rem .75rem rgba(0,0,0,.06);
+  margin-top: 2rem;
+}
+.footer-band .value { font-weight: 700; }
+    
+  </style>
+</head>
+
+<body class="theme-moto">
+  <div class="container mt-5">
+
+    <div class="category-band mb-4">
+      <div class="d-flex align-items-center">
+        <h2 class="mb-0">Motociclette</h2>
+        <span class="category-badge ms-3">Catalogo</span>
+      </div>
+    </div>
+
+    <!-- Navigazione categoria: link sinistra/destra + Home centrale -->
+    <div class="row align-items-center g-2 mb-3">
+      <div class="col-12 col-md-4 text-md-start text-center">
+        <a th:href="@{/automobili}" class="link-cat">&laquo; Vai alle Automobili</a>
+      </div>
+
+      <div class="col-12 col-md-4 text-center">
+        <a th:href="@{/}" class="btn btn-cat">Torna alla Home</a>
+      </div>
+
+      <div class="col-12 col-md-4 text-md-end text-center">
+        <a th:href="@{/furgoni}" class="link-cat">Vai ai Furgoni &raquo;</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-3" th:each="moto : ${motociclette}">
+        <div class="card h-100 theme-accent">
+          <div class="card-body">
+            <h5 class="card-title" th:text="${moto.marca} + ' ' + ${moto.modello}"></h5>
+            <p class="card-text">
+              Codice Immatricolazione:
+              <span th:text="${moto.codiceImmatricolazione}"></span>
+            </p>
+            <p class="card-text">
+              Prezzo: €<span th:text="${moto.prezzo}"></span>
+            </p>
+            <a th:href="@{/motociclette/{id}(id=${moto.id})}" class="btn btn-cat">Dettagli</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer: veicolo più economico della categoria -->
+    <div class="footer-band" th:if="${motoEconomica != null}">
+      Veicolo più economico (Motociclette):
+      <span class="value"
+            th:text="|${motoEconomica.marca} ${motoEconomica.modello} (€ ${#numbers.formatDecimal(motoEconomica.prezzo,1,2)})|">
+      </span>
+    </div>
+
+  </div>
+</body>
+</html>
