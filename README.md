@@ -82,14 +82,13 @@ CREATE DATABASE concessionario_db
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_0900_ai_ci;
 Variabili d’ambiente richieste
-text
-Copia codice
+
 DB_URL=jdbc:mysql://localhost:3306/concessionario_db?useSSL=false&serverTimezone=UTC
 DB_USER=concessionario_user
 DB_PASS=********
+
 Avvio con MySQL
-bash
-Copia codice
+
 mvn spring-boot:run
 (In assenza di profilo esplicito, viene usato il datasource MySQL.)
 
@@ -107,21 +106,17 @@ mvn spring-boot:run
 
 ▶️ Avvio in locale
 Modalità DEMO (H2 – consigliata)
-bash
-Copia codice
+
 mvn spring-boot:run -Dspring-boot.run.profiles=demo
 Modalità H2 con console (debug)
-bash
-Copia codice
+
 mvn spring-boot:run -Dspring-boot.run.profiles=h2
 Console H2:
 
-bash
-Copia codice
+
 http://localhost:8080/h2-console
 Modalità MySQL
-bash
-Copia codice
+
 mvn spring-boot:run
 🐳 Deploy con Docker (Render)
 Il progetto include un Dockerfile multi-stage:
