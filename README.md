@@ -81,6 +81,7 @@ Il progetto supporta anche **MySQL** tramite configurazione esterna con **variab
 CREATE DATABASE concessionario_db
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_0900_ai_ci;
+
 Variabili d’ambiente richieste
 
 DB_URL=jdbc:mysql://localhost:3306/concessionario_db?useSSL=false&serverTimezone=UTC
@@ -105,6 +106,7 @@ mvn spring-boot:run
 (analoghi per le altre categorie)
 
 ▶️ Avvio in locale
+
 Modalità DEMO (H2 – consigliata)
 
 mvn spring-boot:run -Dspring-boot.run.profiles=demo
