@@ -1,6 +1,5 @@
 package com.example.model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,16 +12,17 @@ import java.time.LocalDate;
 @MappedSuperclass
 public abstract class Veicolo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String modello;
-    private String marca;
+	private String modello;
+	private String marca;
 
-    @Column(unique = true, nullable = false)
-    private String codiceImmatricolazione;
+	@Column(unique = true, nullable = false)
+	private String codiceImmatricolazione;
 
-    private LocalDate dataImmatricolazione;
-    private Double prezzo;
+	private LocalDate dataImmatricolazione;
+	private Double prezzo;
+
 }

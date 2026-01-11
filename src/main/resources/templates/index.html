@@ -1,106 +1,168 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Concessionario Auto</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Concessionario Auto</title>
 
-    <!-- Bootstrap (CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Bootstrap (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
 
-        body {
-            display: flex;
-            flex-direction: column;
-            background-image: url('/images/auto_sfondo.webp'); /* inserisci la tua immagine */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: white;
-        }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
 
-        .content {
-            flex: 1 0 auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            padding-top: 30px;
-            z-index: 1;
-        }
+      background-image: url('/images/auto_sfondo.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
 
-        h1 {
-             text-align: center;
-            margin-bottom: 40px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-            background-color: rgba(0, 0, 0, 0.5); /* sfondo semi-trasparente */
-            display: inline-block;                /* riduce la cornice al solo testo */
-            padding: 10px 20px;                   /* spazio interno alla cornice */
-            border-radius: 10px;  
-        }
+      color: white;
+      position: relative;
+    }
 
-        .btn-auto { background-color: #007bff; color:black; font-size: 1.5rem; padding: 15px 30px; margin: 10px; }
-        .btn-moto { background-color: #28a745; color:black; font-size: 1.5rem; padding: 15px 30px; margin: 10px; }
-        .btn-furgone { background-color: #ffc107; color:black; font-size: 1.5rem; padding: 15px 30px; margin: 10px; }
+    /* Leggero overlay per migliorare la leggibilità su mobile */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+    }
 
-        .section { margin-bottom: 30px; display: flex; justify-content: center; flex-wrap: wrap; }
+    /* HEADER sempre in alto */
+    .header {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 14px 12px 0 12px;
+      text-align: center;
+    }
 
-        .footer {
-            flex-shrink: 0;
-        }
+    h1 {
+      text-align: center;
+      margin: 0; /* gestito dal padding dell'header */
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+      background-color: rgba(0, 0, 0, 0.5);
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 10px;
+      max-width: 92vw;
+    }
 
-        .footer-band {
-            width: 100%;
-            background-color: #ffc107;
-            text-align: center;
-            font-weight: bold;
-            padding: 15px 0;
-            color: black;
-        }
-        
-        /* Hover scurito + transizione morbida */
-.btn { transition: background-color .2s ease, color .2s ease; }
+    /* CONTENUTO: centra i bottoni (mobile-first) */
+    .content {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* centra verticalmente il blocco bottoni */
+      align-items: center;
+      padding: 18px 12px;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
 
-/* Automobili: blu → blu più scuro */
-.btn-auto:hover { background-color: #0069d9; color: #fff; }
+    .section {
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
 
-/* Motociclette: verde → verde più scuro */
-.btn-moto:hover { background-color: #218838; color: #fff; }
+    /* Mobile-first: bottoni più compatti + larghezza controllata */
+    .btn-auto,
+    .btn-moto,
+    .btn-furgone {
+      font-size: 1.15rem;
+      padding: 14px 22px;
+      width: min(92vw, 360px);
+      border-radius: .75rem;
+      margin: 0; /* usiamo gap */
+    }
 
-/* Furgoni: giallo → giallo più scuro (testo resta nero per contrasto) */
-.btn-furgone:hover { background-color: #e0a800; color: #fff !important; }
+    .btn-auto { background-color: #007bff; color: black; }
+    .btn-moto { background-color: #28a745; color: black; }
+    .btn-furgone { background-color: #ffc107; color: black; }
 
-/* (facoltativo) piccolo feedback al click */
-.btn:active { transform: translateY(1px); }
-        
-       
-    </style>
+    /* Hover scurito + transizione morbida */
+    .btn { transition: background-color .2s ease, color .2s ease, transform .05s ease; }
+
+    .btn-auto:hover { background-color: #0069d9; color: #fff; }
+    .btn-moto:hover { background-color: #218838; color: #fff; }
+    .btn-furgone:hover { background-color: #e0a800; color: #fff !important; }
+
+    .btn:active { transform: translateY(1px); }
+
+    /* Desktop/tablet: bottoni più grandi come prima */
+    @media (min-width: 768px) {
+      .header { padding-top: 24px; }
+
+      h1 {
+        padding: 10px 20px;
+      }
+
+      .section {
+        margin-bottom: 30px;
+        gap: 0;
+      }
+
+      .btn-auto,
+      .btn-moto,
+      .btn-furgone {
+        font-size: 1.5rem;
+        padding: 15px 30px;
+        width: auto;
+        margin: 10px;
+      }
+    }
+
+    .footer {
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-band {
+      width: 100%;
+      background-color: #ffc107;
+      text-align: center;
+      font-weight: bold;
+      padding: 12px 10px;
+      color: black;
+    }
+  </style>
 </head>
+
 <body>
-
-<div class="content">
+  <div class="header">
     <h1>Benvenuti al Concessionario di Edoardo</h1>
+  </div>
 
+  <div class="content">
     <div class="section">
-        <a th:href="@{/automobili}" class="btn btn-auto">Automobili</a>
-        <a th:href="@{/motociclette}" class="btn btn-moto">Motociclette</a>
-        <a th:href="@{/furgoni}" class="btn btn-furgone">Furgoni</a>
+      <a th:href="@{/automobili}" class="btn btn-auto">Automobili</a>
+      <a th:href="@{/motociclette}" class="btn btn-moto">Motociclette</a>
+      <a th:href="@{/furgoni}" class="btn btn-furgone">Furgoni</a>
     </div>
-</div>
+  </div>
 
-<div class="footer">
+  <div class="footer">
     <div class="footer-band">
-        Veicolo più economico: 
-        <span th:text="|${veicoloEconomico.marca} ${veicoloEconomico.modello} (€${veicoloEconomico.prezzo})|"></span>
+      Veicolo più economico:
+      <span th:text="|${veicoloEconomico.marca} ${veicoloEconomico.modello} (€${veicoloEconomico.prezzo})|"></span>
     </div>
     <div class="footer-band">
-        Prezzo medio dei veicoli: 
-        <span th:text="|${prezzoMedio} €|"></span>
+      Prezzo medio dei veicoli:
+      <span th:text="|${prezzoMedio} €|"></span>
     </div>
-</div>
-
+  </div>
 </body>
 </html>
