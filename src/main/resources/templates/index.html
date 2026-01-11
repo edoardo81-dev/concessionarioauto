@@ -155,13 +155,22 @@
   </div>
 
   <div class="footer">
-    <div class="footer-band">
+    <!-- Veicolo più economico -->
+    <div class="footer-band" th:if="${veicoloEconomico != null}">
       Veicolo più economico:
       <span th:text="|${veicoloEconomico.marca} ${veicoloEconomico.modello} (€${veicoloEconomico.prezzo})|"></span>
     </div>
-    <div class="footer-band">
+    <div class="footer-band" th:unless="${veicoloEconomico != null}">
+      Veicolo più economico: <span>N/D</span>
+    </div>
+
+    <!-- Prezzo medio -->
+    <div class="footer-band" th:if="${prezzoMedio != null}">
       Prezzo medio dei veicoli:
       <span th:text="|${prezzoMedio} €|"></span>
+    </div>
+    <div class="footer-band" th:unless="${prezzoMedio != null}">
+      Prezzo medio dei veicoli: <span>N/D</span>
     </div>
   </div>
 </body>
