@@ -10,7 +10,7 @@ public class MotociclettaDTO {
     private String marca;
     private String codiceImmatricolazione;
     private LocalDate dataImmatricolazione;
-    private Double prezzo;
+    private Integer prezzo;
 
     // campi specifici Motocicletta
     private int cilindrata;

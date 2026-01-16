@@ -23,6 +23,11 @@ public abstract class Veicolo {
 	private String codiceImmatricolazione;
 
 	private LocalDate dataImmatricolazione;
-	private Double prezzo;
+	/**
+	 * Prezzo in euro (INTERO). Es: 12000 = "12.000 €"
+	 *
+	 * NOTE: usiamo Integer per evitare decimali e semplificare formattazioni lato UI.
+	 */
+	private Integer prezzo;
 
 }

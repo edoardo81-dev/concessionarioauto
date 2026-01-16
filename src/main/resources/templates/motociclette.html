@@ -144,7 +144,7 @@ html, body {
 								th:text="${moto.codiceImmatricolazione}"></span>
 						</p>
 						<p class="card-text">
-							Prezzo: €<span th:text="${moto.prezzo}"></span>
+							Prezzo: €<span th:text="${@priceFormatter.format(moto.prezzo)}"></span>
 						</p>
 						<a th:href="@{/motociclette/{id}(id=${moto.id})}"
 							class="btn btn-cat">Dettagli</a>
@@ -156,7 +156,7 @@ html, body {
 		<!-- Footer: veicolo più economico della categoria -->
 		<div class="footer-band" th:if="${motoEconomica != null}">
 			Veicolo più economico (Motociclette): <span class="value"
-				th:text="|${motoEconomica.marca} ${motoEconomica.modello} (€ ${#numbers.formatDecimal(motoEconomica.prezzo,1,2)})|">
+				th:text="|${motoEconomica.marca} ${motoEconomica.modello} (€ ${@priceFormatter.format(motoEconomica.prezzo)})|">
 			</span>
 		</div>
 

@@ -10,13 +10,11 @@ import com.example.repository.MotociclettaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
 
 @Service
 @RequiredArgsConstructor
@@ -35,8 +33,12 @@ public class VeicoloService {
 		return lista;
 	}
 
-	/** Prezzo medio di tutti i veicoli (2 decimali) */
-	public double prezzoMedio() {
+	/**
+	 * Prezzo medio di tutti i veicoli (INTERO, arrotondato).
+	 *
+	 * UX: il valore viene poi formattato con separatore delle migliaia in pagina.
+	 */
+	public Integer prezzoMedio() {
 		List<Object> tutti = findAllVeicoli();
 		if (tutti.isEmpty())
 			return 0;
@@ -51,9 +53,8 @@ public class VeicoloService {
 			else
 				return 0;
 		}).sum();
-
 		double media = somma / tutti.size();
-		return BigDecimal.valueOf(media).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		return (int) Math.round(media);
 	}
 
 	/** Veicolo meno caro tra tutte le categorie (DTO) */
@@ -64,11 +65,11 @@ public class VeicoloService {
 
 		Object min = tutti.get(0);
 		for (Object v : tutti) {
-			double prezzoV = (v instanceof Automobile) ? ((Automobile) v).getPrezzo()
+			int prezzoV = (v instanceof Automobile) ? ((Automobile) v).getPrezzo()
 					: (v instanceof Motocicletta) ? ((Motocicletta) v).getPrezzo()
 							: (v instanceof Furgone) ? ((Furgone) v).getPrezzo() : 0;
 
-			double prezzoMin = (min instanceof Automobile) ? ((Automobile) min).getPrezzo()
+			int prezzoMin = (min instanceof Automobile) ? ((Automobile) min).getPrezzo()
 					: (min instanceof Motocicletta) ? ((Motocicletta) min).getPrezzo()
 							: (min instanceof Furgone) ? ((Furgone) min).getPrezzo() : 0;
 
@@ -90,12 +91,10 @@ public class VeicoloService {
 	 * Metodo generico riusabile per trovare il più economico in una lista e
 	 * mapparlo in DTO.
 	 */
-	private <T> VeicoloDTO piuEconomicoDTO(List<T> lista, ToDoubleFunction<T> prezzoExtractor,
+	private <T> VeicoloDTO piuEconomicoDTO(List<T> lista, ToIntFunction<T> prezzoExtractor,
 			Function<T, String> marcaExtractor, Function<T, String> modelloExtractor) {
-
-		return lista.stream().min(Comparator.comparingDouble(prezzoExtractor))
-				.map(v -> new VeicoloDTO(marcaExtractor.apply(v), modelloExtractor.apply(v),
-						prezzoExtractor.applyAsDouble(v)))
+		return lista.stream().min(Comparator.comparingInt(prezzoExtractor))
+				.map(v -> new VeicoloDTO(marcaExtractor.apply(v), modelloExtractor.apply(v), prezzoExtractor.applyAsInt(v)))
 				.orElse(null);
 	}
 
@@ -113,10 +112,10 @@ public class VeicoloService {
 		return piuEconomicoDTO(furgRepo.findAll(), Furgone::getPrezzo, Furgone::getMarca, Furgone::getModello);
 	}
 
-	/** Prezzo medio per marca (2 decimali) */
-	public double prezzoMedioPerMarca(String marca) {
+	/** Prezzo medio per marca (INTERO, arrotondato) */
+	public Integer prezzoMedioPerMarca(String marca) {
 		List<Object> tutti = findAllVeicoli();
-		List<Double> prezzi = new ArrayList<>();
+		List<Integer> prezzi = new ArrayList<>();
 		for (Object v : tutti) {
 			if (v instanceof Automobile a && a.getMarca().equalsIgnoreCase(marca))
 				prezzi.add(a.getPrezzo());
@@ -127,8 +126,7 @@ public class VeicoloService {
 		}
 		if (prezzi.isEmpty())
 			return 0;
-
-		double media = prezzi.stream().mapToDouble(Double::doubleValue).average().orElse(0);
-		return BigDecimal.valueOf(media).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		double media = prezzi.stream().mapToInt(Integer::intValue).average().orElse(0);
+		return (int) Math.round(media);
 	}
 }

@@ -75,9 +75,9 @@
       <div class="d-flex flex-wrap py-1">
         <div class="spec-label">Prezzo</div>
         <div class="price">
-          €<span th:if="${auto != null}"    th:text="${auto.prezzo}"></span>
-          <span th:if="${moto != null}"    th:text="${moto.prezzo}"></span>
-          <span th:if="${furgone != null}" th:text="${furgone.prezzo}"></span>
+          €<span th:if="${auto != null}"    th:text="${@priceFormatter.format(auto.prezzo)}"></span>
+          <span th:if="${moto != null}"    th:text="${@priceFormatter.format(moto.prezzo)}"></span>
+          <span th:if="${furgone != null}" th:text="${@priceFormatter.format(furgone.prezzo)}"></span>
         </div>
       </div>
 

@@ -11,7 +11,7 @@ public class FurgoneDTO {
     private String marca;
     private String codiceImmatricolazione;
     private LocalDate dataImmatricolazione;
-    private Double prezzo;
+    private Integer prezzo;
 
     // campi specifici Furgone
     private double capacitaCarico;

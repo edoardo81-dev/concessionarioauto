@@ -9,5 +9,5 @@ import lombok.Data;
 public class VeicoloDTO {
     private String marca;
     private String modello;
-    private double prezzo;
+    private Integer prezzo;
 }

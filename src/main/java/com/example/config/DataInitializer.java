@@ -43,7 +43,7 @@ public class DataInitializer implements CommandLineRunner {
         a1.setMarca("Fiat");
         a1.setCodiceImmatricolazione("IM-0001");
         a1.setDataImmatricolazione(LocalDate.of(2018, 5, 20));
-        a1.setPrezzo(8000.0);
+        a1.setPrezzo(8000);
         a1.setPorte(3);              // Panda: 3 porte
         a1.setElettrica(true);       // Panda: elettrica
         autoRepo.save(a1);
@@ -53,7 +53,7 @@ public class DataInitializer implements CommandLineRunner {
         a2.setMarca("Audi");
         a2.setCodiceImmatricolazione("IM-0002");
         a2.setDataImmatricolazione(LocalDate.of(2020, 3, 10));
-        a2.setPrezzo(22000.0);
+        a2.setPrezzo(22000);
         a2.setPorte(5);
         a2.setElettrica(false);
         autoRepo.save(a2);
@@ -63,7 +63,7 @@ public class DataInitializer implements CommandLineRunner {
         a3.setMarca("Ford");
         a3.setCodiceImmatricolazione("IM-0003");
         a3.setDataImmatricolazione(LocalDate.of(2023, 2, 6));
-        a3.setPrezzo(38000.0);
+        a3.setPrezzo(38000);
         a3.setPorte(5);
         a3.setElettrica(false);
         autoRepo.save(a3);
@@ -73,7 +73,7 @@ public class DataInitializer implements CommandLineRunner {
         a4.setMarca("Lamborghini");
         a4.setCodiceImmatricolazione("IM-0004");
         a4.setDataImmatricolazione(LocalDate.of(2021, 3, 22));
-        a4.setPrezzo(95000.0);
+        a4.setPrezzo(95000);
         a4.setPorte(3);              // Diablo: 3 porte
         a4.setElettrica(false);
         autoRepo.save(a4);
@@ -83,7 +83,7 @@ public class DataInitializer implements CommandLineRunner {
         a5.setMarca("Renault");
         a5.setCodiceImmatricolazione("IM-0005");
         a5.setDataImmatricolazione(LocalDate.of(2019, 9, 12));
-        a5.setPrezzo(11500.0);
+        a5.setPrezzo(11500);
         a5.setPorte(5);
         a5.setElettrica(false);
         autoRepo.save(a5);
@@ -93,7 +93,7 @@ public class DataInitializer implements CommandLineRunner {
         a6.setMarca("Alfa Romeo");
         a6.setCodiceImmatricolazione("IM-0006");
         a6.setDataImmatricolazione(LocalDate.of(1994, 6, 15));
-        a6.setPrezzo(55000.0);
+        a6.setPrezzo(55000);
         a6.setPorte(5);              // portiamo a 5
         a6.setElettrica(false);
         autoRepo.save(a6);
@@ -104,7 +104,7 @@ public class DataInitializer implements CommandLineRunner {
         m1.setMarca("Kawasaki");
         m1.setCodiceImmatricolazione("IM-M001");
         m1.setDataImmatricolazione(LocalDate.of(2019, 7, 1));
-        m1.setPrezzo(9000.0);
+        m1.setPrezzo(9000);
         m1.setCilindrata(650);
         m1.setSidecar(false);
         motoRepo.save(m1);
@@ -114,7 +114,7 @@ public class DataInitializer implements CommandLineRunner {
         m2.setMarca("KTM");
         m2.setCodiceImmatricolazione("IM-M002");
         m2.setDataImmatricolazione(LocalDate.of(2021, 2, 15));
-        m2.setPrezzo(7000.0);
+        m2.setPrezzo(7000);
         m2.setCilindrata(390);
         m2.setSidecar(false);
         motoRepo.save(m2);
@@ -124,7 +124,7 @@ public class DataInitializer implements CommandLineRunner {
         m3.setMarca("Honda");
         m3.setCodiceImmatricolazione("IM-M003");
         m3.setDataImmatricolazione(LocalDate.of(2004, 4, 20));
-        m3.setPrezzo(8500.0);
+        m3.setPrezzo(8500);
         m3.setCilindrata(893);
         m3.setSidecar(false);
         motoRepo.save(m3);
@@ -135,7 +135,7 @@ public class DataInitializer implements CommandLineRunner {
         f1.setMarca("Ford");
         f1.setCodiceImmatricolazione("IM-F001");
         f1.setDataImmatricolazione(LocalDate.of(2017, 11, 3));
-        f1.setPrezzo(18000.0);
+        f1.setPrezzo(18000);
         f1.setCapacitaCarico(1200.0);
         f1.setRefrigerato(false);
         furgRepo.save(f1);
@@ -145,7 +145,7 @@ public class DataInitializer implements CommandLineRunner {
         f2.setMarca("Mercedes");
         f2.setCodiceImmatricolazione("IM-F002");
         f2.setDataImmatricolazione(LocalDate.of(2022, 1, 5));
-        f2.setPrezzo(35000.0);
+        f2.setPrezzo(35000);
         f2.setCapacitaCarico(1800.0);
         f2.setRefrigerato(true);
         furgRepo.save(f2);
@@ -155,7 +155,7 @@ public class DataInitializer implements CommandLineRunner {
         f3.setMarca("Iveco");
         f3.setCodiceImmatricolazione("IM-F003");
         f3.setDataImmatricolazione(LocalDate.of(2020, 10, 8));
-        f3.setPrezzo(28000.0);
+        f3.setPrezzo(28000);
         f3.setCapacitaCarico(2000.0);
         f3.setRefrigerato(false);
         furgRepo.save(f3);
