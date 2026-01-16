@@ -85,8 +85,8 @@ COLLATE utf8mb4_0900_ai_ci;
 Variabili d’ambiente richieste
 
 DB_URL=jdbc:mysql://localhost:3306/concessionario_db?useSSL=false&serverTimezone=UTC
-DB_USER=concessionario_user
-DB_PASS=********
+DB_USER=root
+DB_PASS=******** <--- inserisci qui la tua password
 
 Avvio con MySQL
 
