@@ -3,7 +3,7 @@
 Applicazione **Spring Boot MVC** per la gestione di un concessionario di **automobili, motociclette e furgoni**, con interfaccia web realizzata tramite **Thymeleaf**.
 
 👉 **Demo pubblica (Render):**  
-https://concessionarioauto.onrender.com
+https://concessionarioauto-dq40.onrender.com
 
 ---
 
